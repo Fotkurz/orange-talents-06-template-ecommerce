@@ -1,7 +1,7 @@
 package br.com.zupacademy.guilherme.mercadolivre.domain;
 
 import org.hibernate.validator.constraints.Length;
-import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -29,6 +29,7 @@ public class User {
 
     public User(String login, String password) {
         this.login = login;
+
         String encoded = BCrypt.hashpw(password, BCrypt.gensalt());
         this.password = encoded;
     }
