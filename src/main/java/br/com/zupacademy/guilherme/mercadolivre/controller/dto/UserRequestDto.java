@@ -14,7 +14,7 @@ public class UserRequestDto {
     @NotBlank @Length(min = 6)
     private String password;
 
-    public UserRequestDto(@NotBlank @Email String login, @NotBlank @Length(min = 6) String password) {
+    public UserRequestDto(@NotBlank String login, @NotBlank @Length(min = 6) String password) {
         this.login = login;
         this.password = password;
     }

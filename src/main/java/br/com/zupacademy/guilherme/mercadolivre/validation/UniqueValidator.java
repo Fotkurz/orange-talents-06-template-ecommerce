@@ -31,7 +31,7 @@ public class UniqueValidator implements ConstraintValidator<Unique, Object> {
         if (list.isEmpty()) {
             return true;
         } else {
-            String message = campo + " ja foi cadastrado.";
+            String message = campo + " already used";
             context.buildConstraintViolationWithTemplate(message).addConstraintViolation();
             context.disableDefaultConstraintViolation();
         }
