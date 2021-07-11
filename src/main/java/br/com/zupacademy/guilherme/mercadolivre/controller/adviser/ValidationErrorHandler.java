@@ -1,6 +1,6 @@
 package br.com.zupacademy.guilherme.mercadolivre.controller.adviser;
 
-import br.com.zupacademy.guilherme.mercadolivre.controller.dto.FormErrorDto;
+import br.com.zupacademy.guilherme.mercadolivre.controller.dto.response.FormErrorDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;

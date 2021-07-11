@@ -1,4 +1,4 @@
-package br.com.zupacademy.guilherme.mercadolivre.controller.dto;
+package br.com.zupacademy.guilherme.mercadolivre.controller.dto.request;
 
 import br.com.zupacademy.guilherme.mercadolivre.domain.User;
 import br.com.zupacademy.guilherme.mercadolivre.validation.Unique;

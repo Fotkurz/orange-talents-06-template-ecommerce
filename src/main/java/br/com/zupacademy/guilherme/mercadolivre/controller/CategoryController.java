@@ -1,6 +1,6 @@
 package br.com.zupacademy.guilherme.mercadolivre.controller;
 
-import br.com.zupacademy.guilherme.mercadolivre.controller.dto.CategoryRequestDto;
+import br.com.zupacademy.guilherme.mercadolivre.controller.dto.request.CategoryRequestDto;
 import br.com.zupacademy.guilherme.mercadolivre.domain.Category;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -1,4 +1,4 @@
-package br.com.zupacademy.guilherme.mercadolivre.controller.dto;
+package br.com.zupacademy.guilherme.mercadolivre.controller.dto.response;
 
 public class FormErrorDto {
 

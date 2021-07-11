@@ -1,6 +1,6 @@
 package br.com.zupacademy.guilherme.mercadolivre.controller;
 
-import br.com.zupacademy.guilherme.mercadolivre.controller.dto.UserRequestDto;
+import br.com.zupacademy.guilherme.mercadolivre.controller.dto.request.UserRequestDto;
 import br.com.zupacademy.guilherme.mercadolivre.domain.User;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
