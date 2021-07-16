@@ -5,10 +5,10 @@ import javax.validation.Payload;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Target({FIELD})
+@Target({FIELD, PARAMETER, METHOD, TYPE, TYPE_PARAMETER, LOCAL_VARIABLE})
 @Retention(RUNTIME)
 @Constraint(validatedBy = UniqueValidator.class)
 public @interface Unique {

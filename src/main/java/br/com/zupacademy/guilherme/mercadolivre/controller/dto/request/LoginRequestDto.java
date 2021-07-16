@@ -1,4 +1,4 @@
-package br.com.zupacademy.guilherme.mercadolivre.controller;
+package br.com.zupacademy.guilherme.mercadolivre.controller.dto.request;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 

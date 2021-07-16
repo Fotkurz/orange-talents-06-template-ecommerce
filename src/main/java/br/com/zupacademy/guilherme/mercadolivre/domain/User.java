@@ -27,6 +27,7 @@ public class User implements UserDetails {
     private LocalDateTime registerDateTime = LocalDateTime.now();
 
     public User() {}
+
     public User(String login, String password) {
         this.login = login;
         String encoded = BCrypt.hashpw(password, BCrypt.gensalt());
@@ -69,6 +70,11 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
+        return true;
+    }
+
+    public boolean haveAProductAlready(EntityManager em) {
+        if(em.createQuery("SELECT x FROM Product x WHERE x.user.id = " + getId()).getResultList().isEmpty()) return false;
         return true;
     }
 }
