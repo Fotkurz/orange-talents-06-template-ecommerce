@@ -11,6 +11,7 @@ import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
@@ -27,24 +28,28 @@ public class Product {
     private BigDecimal value;
     @NotNull @Min(0) @Positive
     private Integer quantity;
-    @OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST)
-    private List<Characteristic> characteristics;
     @NotBlank @Length(max = 1000)
     private String description;
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST) @Column(name = "characteristics")
+    private List<Characteristic> characteristics;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
+    private Set<ProductImages> images;
     @NotNull @ManyToOne
     private Category category;
+    @NotNull
     private LocalDateTime registerTime = LocalDateTime.now();
 
     @OneToOne
     private User user;
-
     public Product() {}
 
     public Product(@NotBlank String name, @NotNull @Positive BigDecimal value,
                    @NotNull @Min(0) Integer quantity,
-                   @NotBlank @Length(max = 1000) String description, Category category,
-                   List<CharacteristicRequestDto> characteristics, User user) {
+                   @NotBlank @Length(max = 1000) String description,
+                   @NotNull Category category,
+                   @NotNull List<CharacteristicRequestDto> characteristics,
+                   @NotNull User user) {
         this.name = name;
         this.value = value;
         this.quantity = quantity;
@@ -54,4 +59,11 @@ public class Product {
         this.user = user;
     }
 
+    public void setImagesLinks(Set<String> urls) {
+        this.images = urls.stream().map(url -> new ProductImages(this, url)).collect(Collectors.toSet());
+    }
+
+    public boolean isOwner(String login) {
+        return this.user.getUsername().contentEquals(login);
+    }
 }

@@ -19,7 +19,7 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank @Email
+    @NotBlank @Email @Column(unique = true)
     private String login;
     @NotBlank @Length(min = 6)
     private String password;
