@@ -1,11 +1,14 @@
 package br.com.zupacademy.guilherme.mercadolivre.controller;
 
 import br.com.zupacademy.guilherme.mercadolivre.controller.dto.request.ImageRequestDto;
+import br.com.zupacademy.guilherme.mercadolivre.controller.dto.request.OpinionRequestDto;
 import br.com.zupacademy.guilherme.mercadolivre.controller.dto.request.ProductRequestDto;
 import br.com.zupacademy.guilherme.mercadolivre.controller.dto.response.FormErrorDto;
+import br.com.zupacademy.guilherme.mercadolivre.domain.Opinion;
 import br.com.zupacademy.guilherme.mercadolivre.domain.Product;
 import br.com.zupacademy.guilherme.mercadolivre.domain.User;
 import br.com.zupacademy.guilherme.mercadolivre.repository.UserRepository;
+import io.jsonwebtoken.lang.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
@@ -61,5 +64,23 @@ public class ProductController {
             return ResponseEntity.badRequest().body(new FormErrorDto("Product", "No product with this id"));
         }
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new FormErrorDto("User", "Product not owned by " + login));
+    }
+
+    @PostMapping("/{id}/opinion")
+    @Transactional
+    public ResponseEntity<?> opinion(@PathVariable("id") Long id, @Valid @RequestBody OpinionRequestDto opinionRequestDto,
+                                     @AuthenticationPrincipal User user) {
+        Optional<Product> product = Optional.ofNullable(entityManager.find(Product.class, id));
+        if(product.isPresent()) {
+            Optional<User> owner = userRepository.findByLogin(user.getUsername());
+            if(owner.isPresent()) {
+                Opinion opinion = opinionRequestDto.toModel(product.get(), owner.get());
+                entityManager.persist(opinion);
+                return ResponseEntity.ok().build();
+            }
+            return ResponseEntity.badRequest().body(new FormErrorDto("User", "Not a valid user"));
+        }
+
+        return ResponseEntity.badRequest().body(new FormErrorDto("Product", "No product with this id"));
     }
 }

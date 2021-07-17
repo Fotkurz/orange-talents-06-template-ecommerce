@@ -14,7 +14,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-@Validated
 public class ProductRequestDto {
 
     @NotBlank
@@ -30,7 +29,6 @@ public class ProductRequestDto {
     private Long idCategory;
     @Size(min = 3) @Valid
     private List<CharacteristicRequestDto> characteristics = new ArrayList<>();
-    
 
     public ProductRequestDto(String name, BigDecimal value, Integer quantity,
                              List<CharacteristicRequestDto> characteristics, String description, Long idCategory){
