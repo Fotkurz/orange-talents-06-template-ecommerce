@@ -19,6 +19,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
     private String secret;
     private TokenManager tokenManager;
+
     public TokenAuthenticationFilter(String secret, TokenManager tokenManager) {
         this.secret = secret;
         this.tokenManager = tokenManager;
@@ -28,7 +29,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = tokenManager.tokenRecovery(request);
         if (token != null) {
-            if(tokenManager.isTokenValid(token)) {
+            if (tokenManager.isTokenValid(token)) {
                 isUserValid(token);
             }
         }

@@ -21,7 +21,7 @@ public class UserController {
 
     @PostMapping
     @Transactional
-    public void create (@RequestBody @Valid UserRequestDto userRequestDto) {
+    public void create(@RequestBody @Valid UserRequestDto userRequestDto) {
         User user = userRequestDto.toModel();
         em.persist(user);
     }

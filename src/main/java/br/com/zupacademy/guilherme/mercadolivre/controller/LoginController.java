@@ -38,7 +38,7 @@ public class LoginController {
     @Value("${mercadolivre.jwt.secret}")
     private String secret;
 
-    private Date generateExpirationDate () {
+    private Date generateExpirationDate() {
         Date date = Date.from(LocalDateTime.now().plusHours(1).atZone(ZoneId.of("America/Sao_Paulo")).toInstant());
         return date;
     }
@@ -46,11 +46,11 @@ public class LoginController {
     @PostMapping
     public ResponseEntity<?> login(@RequestBody @Valid LoginRequestDto loginRequestDto) {
         UsernamePasswordAuthenticationToken loginData = loginRequestDto.toUserToken();
-        try{
+        try {
             Authentication authentication = authManager.authenticate(loginData);
             String token = tokenManager.generateNewToken(authentication);
             return ResponseEntity.ok().body(new LoginResponseDto("Bearer", token));
-        }catch(AuthenticationException e) {
+        } catch (AuthenticationException e) {
             return ResponseEntity.badRequest().body(new FormErrorDto("username/password", "invalid"));
         }
     }

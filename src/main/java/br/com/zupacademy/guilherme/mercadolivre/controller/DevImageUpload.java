@@ -13,6 +13,7 @@ import java.util.Set;
 public class DevImageUpload {
 
     private Set<String> urls = new HashSet<>();
+
     public DevImageUpload(List<MultipartFile> images) {
         images.forEach(i -> {
             urls.add("http://s3.amazonaws.com/mercadolivre/" + i.getOriginalFilename());

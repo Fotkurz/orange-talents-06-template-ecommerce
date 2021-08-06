@@ -4,6 +4,7 @@ public class LoginResponseDto {
 
     private String type;
     private String token;
+
     public LoginResponseDto(String type, String token) {
         this.type = type;
         this.token = token;

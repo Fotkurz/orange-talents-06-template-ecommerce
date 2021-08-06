@@ -19,14 +19,18 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank @Email @Column(unique = true)
+    @NotBlank
+    @Email
+    @Column(unique = true)
     private String login;
-    @NotBlank @Length(min = 6)
+    @NotBlank
+    @Length(min = 6)
     private String password;
     @PastOrPresent
     private LocalDateTime registerDateTime = LocalDateTime.now();
 
-    public User() {}
+    public User() {
+    }
 
     public User(String login, String password) {
         this.login = login;
@@ -74,7 +78,8 @@ public class User implements UserDetails {
     }
 
     public boolean haveAProductAlready(EntityManager em) {
-        if(em.createQuery("SELECT x FROM Product x WHERE x.user.id = " + getId()).getResultList().isEmpty()) return false;
+        if (em.createQuery("SELECT x FROM Product x WHERE x.user.id = " + getId()).getResultList().isEmpty())
+            return false;
         return true;
     }
 }

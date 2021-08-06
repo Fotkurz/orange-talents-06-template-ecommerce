@@ -16,11 +16,13 @@ public class ProductImages {
     @URL
     private String url;
 
-    @ManyToOne @NotNull
+    @ManyToOne
+    @NotNull
     private Product product;
 
     @Deprecated
-    public ProductImages() {}
+    public ProductImages() {
+    }
 
     public ProductImages(Product product, String url) {
         this.url = url;

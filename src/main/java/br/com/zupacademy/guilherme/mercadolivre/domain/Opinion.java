@@ -14,19 +14,25 @@ public class Opinion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull @Range(min = 1, max = 5) @Positive
+    @NotNull
+    @Range(min = 1, max = 5)
+    @Positive
     private Integer rating;
     @NotBlank
     private String title;
-    @NotBlank @Column(length = 500)
+    @NotBlank
+    @Column(length = 500)
     private String description;
 
-    @ManyToOne @NotNull
+    @ManyToOne
+    @NotNull
     private Product product;
-    @ManyToOne @NotNull
+    @ManyToOne
+    @NotNull
     private User user;
 
-    public Opinion (){}
+    public Opinion() {
+    }
 
     public Opinion(Integer rating, String title, String description, Product product, User user) {
         this.rating = rating;

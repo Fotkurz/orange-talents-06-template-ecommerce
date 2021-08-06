@@ -9,9 +9,12 @@ import javax.validation.constraints.NotBlank;
 
 public class UserRequestDto {
 
-    @NotBlank @Email @Unique(fieldName = "login", clazz = User.class)
+    @NotBlank
+    @Email
+    @Unique(fieldName = "login", clazz = User.class)
     private String login;
-    @NotBlank @Length(min = 6)
+    @NotBlank
+    @Length(min = 6)
     private String password;
 
     public UserRequestDto(@NotBlank String login, @NotBlank @Length(min = 6) String password) {

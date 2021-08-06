@@ -26,23 +26,30 @@ public class Product {
     @NotNull
     @Positive
     private BigDecimal value;
-    @NotNull @Min(0) @Positive
+    @NotNull
+    @Min(0)
+    @Positive
     private Integer quantity;
-    @NotBlank @Length(max = 1000)
+    @NotBlank
+    @Length(max = 1000)
     private String description;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST) @Column(name = "characteristics")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST)
+    @Column(name = "characteristics")
     private List<Characteristic> characteristics;
     @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
     private Set<ProductImages> images;
-    @NotNull @ManyToOne
+    @NotNull
+    @ManyToOne
     private Category category;
     @NotNull
     private LocalDateTime registerTime = LocalDateTime.now();
 
     @OneToOne
     private User user;
-    public Product() {}
+
+    public Product() {
+    }
 
     public Product(@NotBlank String name, @NotNull @Positive BigDecimal value,
                    @NotNull @Min(0) Integer quantity,
@@ -65,5 +72,13 @@ public class Product {
 
     public boolean isOwner(String login) {
         return this.user.getUsername().contentEquals(login);
+    }
+
+    public User getOwner() {
+        return this.user;
+    }
+
+    public String getName() {
+        return this.name;
     }
 }

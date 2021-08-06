@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Profile;
 @Profile("prod")
 public class MercadolivreApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MercadolivreApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MercadolivreApplication.class, args);
+    }
 
 }

@@ -18,7 +18,7 @@ public class TokenManager {
     @Value("${mercadolivre.jwt.secret}")
     private String secret;
 
-    private Date generateExpirationDate () {
+    private Date generateExpirationDate() {
         Date date = Date.from(LocalDateTime.now().plusHours(1).atZone(ZoneId.of("America/Sao_Paulo")).toInstant());
         return date;
     }
@@ -41,7 +41,7 @@ public class TokenManager {
 
     public String tokenRecovery(HttpServletRequest request) {
         String authorizationHeader = request.getHeader("Authorization");
-        if(authorizationHeader == null || authorizationHeader.isEmpty() || !authorizationHeader.startsWith("Bearer ")) {
+        if (authorizationHeader == null || authorizationHeader.isEmpty() || !authorizationHeader.startsWith("Bearer ")) {
             return null;
         }
         return authorizationHeader.substring(7, authorizationHeader.length());

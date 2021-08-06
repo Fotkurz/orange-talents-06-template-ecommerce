@@ -50,11 +50,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .anyRequest().authenticated()
-        .and()
-            .csrf().disable()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        .and()
-            .addFilterBefore(new TokenAuthenticationFilter(secret, tokenManager), UsernamePasswordAuthenticationFilter.class);
+                .and()
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .addFilterBefore(new TokenAuthenticationFilter(secret, tokenManager), UsernamePasswordAuthenticationFilter.class);
     }
 
 

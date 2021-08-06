@@ -15,7 +15,8 @@ public class Category {
     @ManyToOne
     private Category category;
 
-    public Category() {}
+    public Category() {
+    }
 
     public Category(String name) {
         this.name = name;

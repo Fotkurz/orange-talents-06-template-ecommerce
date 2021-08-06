@@ -19,7 +19,8 @@ public class Characteristic {
     @ManyToOne
     private Product product;
 
-    public Characteristic() {}
+    public Characteristic() {
+    }
 
     public Characteristic(String name, String description, Product product) {
         this.name = name;

@@ -12,16 +12,17 @@ import org.springframework.context.annotation.Profile;
 @Profile("dev")
 public class DevMercadolivreApplication implements CommandLineRunner {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DevMercadolivreApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DevMercadolivreApplication.class, args);
+    }
 
-	@Autowired
-	UserRepository repository;
-	@Override
-	public void run(String... args) throws Exception {
-		User user = new User("tolkien@gmail.com", "123456");
-		repository.save(user);
-		System.out.println("[COMMAND LINE] User " + user.getUsername() + " salvo!");
-	}
+    @Autowired
+    UserRepository repository;
+
+    @Override
+    public void run(String... args) throws Exception {
+        User user = new User("tolkien@gmail.com", "123456");
+        repository.save(user);
+        System.out.println("[COMMAND LINE] User " + user.getUsername() + " salvo!");
+    }
 }

@@ -13,8 +13,12 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = UniqueValidator.class)
 public @interface Unique {
     String fieldName();
+
     Class<?> clazz();
+
     String message() default "Falha na validação de valor único";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

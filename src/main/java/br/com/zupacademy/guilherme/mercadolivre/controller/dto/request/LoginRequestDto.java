@@ -20,7 +20,7 @@ public class LoginRequestDto {
         return password;
     }
 
-    public UsernamePasswordAuthenticationToken toUserToken(){
+    public UsernamePasswordAuthenticationToken toUserToken() {
         return new UsernamePasswordAuthenticationToken(this.login, this.password);
     }
 
