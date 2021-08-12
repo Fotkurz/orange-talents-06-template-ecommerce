@@ -5,6 +5,7 @@ import br.com.zupacademy.guilherme.mercadolivre.controller.dto.request.OpinionRe
 import br.com.zupacademy.guilherme.mercadolivre.controller.dto.request.ProductRequestDto;
 import br.com.zupacademy.guilherme.mercadolivre.controller.dto.request.QuestionRequestDto;
 import br.com.zupacademy.guilherme.mercadolivre.controller.dto.response.FormErrorDto;
+import br.com.zupacademy.guilherme.mercadolivre.controller.dto.response.ProductResponseDto;
 import br.com.zupacademy.guilherme.mercadolivre.domain.Opinion;
 import br.com.zupacademy.guilherme.mercadolivre.domain.Product;
 import br.com.zupacademy.guilherme.mercadolivre.domain.ProductQuestion;
@@ -102,5 +103,17 @@ public class ProductController {
         }
 
         return ResponseEntity.badRequest().body(new FormErrorDto("Product", "No product with this id"));
+    }
+
+    @GetMapping("/{id}")
+    @Transactional
+    public ResponseEntity<?> details(@PathVariable("id") Long id) {
+
+        Optional<Product> product = Optional.ofNullable(entityManager.find(Product.class, id));
+
+        if (product.isEmpty()) return ResponseEntity.notFound().build();
+
+        ProductResponseDto productResponseDto = new ProductResponseDto(product.get());
+        return ResponseEntity.ok().body(productResponseDto);
     }
 }

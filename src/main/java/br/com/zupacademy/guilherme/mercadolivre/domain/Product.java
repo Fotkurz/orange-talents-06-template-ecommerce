@@ -34,19 +34,27 @@ public class Product {
     @Length(max = 1000)
     private String description;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST)
-    @Column(name = "characteristics")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Characteristic> characteristics;
-    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Set<ProductImages> images;
+
     @NotNull
     @ManyToOne
     private Category category;
+
     @NotNull
-    private LocalDateTime registerTime = LocalDateTime.now();
+    private final LocalDateTime registerTime = LocalDateTime.now();
 
     @OneToOne
     private User user;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<Opinion> opinions;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ProductQuestion> questions;
 
     public Product() {
     }
@@ -80,5 +88,61 @@ public class Product {
 
     public String getName() {
         return this.name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public BigDecimal getValue() {
+        return value;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public List<Characteristic> getCharacteristics() {
+        return characteristics;
+    }
+
+    public Set<ProductImages> getImages() {
+        return images;
+    }
+
+    public LocalDateTime getRegisterTime() {
+        return registerTime;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public List<Opinion> getOpinions() {
+        return opinions;
+    }
+
+    public List<ProductQuestion> getQuestions() {
+        return questions;
+    }
+
+    public String getCategoryName() {
+        return this.category.getName();
+    }
+
+    public Double ratingAverage() {
+        int sum;
+        List<Integer> ratings = opinions.stream().map(Opinion::getRating).collect(Collectors.toList());
+        Integer elements = ratingNumber(opinions);
+        sum = ratings.stream().mapToInt(i -> i).sum();
+        return (double) sum / elements;
+    }
+
+    public Integer ratingNumber(List<Opinion> opinions) {
+        return opinions.size();
     }
 }

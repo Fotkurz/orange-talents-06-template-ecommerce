@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 @Table(name = "tbl_characteristics")
@@ -16,7 +18,8 @@ public class Characteristic {
     private String name;
     @NotBlank
     private String description;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_product")
     private Product product;
 
     public Characteristic() {
@@ -38,5 +41,11 @@ public class Characteristic {
 
     public Characteristic toModel(@NotNull @Valid Product product) {
         return new Characteristic(name, description, product);
+    }
+
+    public Map<String, String> toMap() {
+        Map<String, String> maps = new HashMap<>();
+        maps.put(this.name, this.description);
+        return maps;
     }
 }

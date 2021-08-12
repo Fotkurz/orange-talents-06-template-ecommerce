@@ -28,4 +28,8 @@ public class ProductImages {
         this.url = url;
         this.product = product;
     }
+
+    public String getUrl() {
+        return this.url;
+    }
 }

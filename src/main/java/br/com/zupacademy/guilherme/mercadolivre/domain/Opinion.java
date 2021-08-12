@@ -1,5 +1,6 @@
 package br.com.zupacademy.guilherme.mercadolivre.domain;
 
+import br.com.zupacademy.guilherme.mercadolivre.controller.dto.response.OpinionResponseDto;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
@@ -24,7 +25,8 @@ public class Opinion {
     @Column(length = 500)
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_product")
     @NotNull
     private Product product;
     @ManyToOne
@@ -40,5 +42,17 @@ public class Opinion {
         this.description = description;
         this.product = product;
         this.user = user;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Integer getRating() {
+        return this.rating;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 }

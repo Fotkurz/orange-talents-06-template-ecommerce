@@ -47,4 +47,8 @@ public class ProductQuestion implements EmailSenderObserver {
         System.out.println("[Subject: Someone posted a question about your product: " + product.getName() + "]");
         System.out.println("[Body: " + user.getUsername() + " : " + title + "]");
     }
+
+    public String getTitle() {
+        return this.title;
+    }
 }
