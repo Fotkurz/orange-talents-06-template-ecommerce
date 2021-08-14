@@ -45,6 +45,8 @@ public class ProductController {
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.badRequest().body(new FormErrorDto("User", "Already have a product registred"));
+
+
     }
 
     @PostMapping(value = "/{id}/images")

@@ -4,10 +4,7 @@ import br.com.zupacademy.guilherme.mercadolivre.controller.dto.request.Character
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,7 +25,7 @@ public class Product {
     private BigDecimal value;
     @NotNull
     @Min(0)
-    @Positive
+    @PositiveOrZero
     private Integer quantity;
     @NotBlank
     @Length(max = 1000)
@@ -144,5 +141,14 @@ public class Product {
 
     public Integer ratingNumber(List<Opinion> opinions) {
         return opinions.size();
+    }
+
+    public boolean stockCheck(Integer neededNumber) {
+        if (this.quantity < neededNumber) return false;
+        return true;
+    }
+
+    public void decreaseQuantity(Integer bought) {
+        if(stockCheck(bought)) this.quantity -= bought;
     }
 }

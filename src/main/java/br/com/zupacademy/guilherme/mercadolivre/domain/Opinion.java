@@ -1,6 +1,5 @@
 package br.com.zupacademy.guilherme.mercadolivre.domain;
 
-import br.com.zupacademy.guilherme.mercadolivre.controller.dto.response.OpinionResponseDto;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
