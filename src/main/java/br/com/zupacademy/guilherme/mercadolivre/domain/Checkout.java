@@ -1,5 +1,7 @@
 package br.com.zupacademy.guilherme.mercadolivre.domain;
 
+import br.com.zupacademy.guilherme.mercadolivre.observer.EmailSenderObserver;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -9,7 +11,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "tbl_checkouts")
-public class Checkout {
+public class Checkout implements EmailSenderObserver {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +38,7 @@ public class Checkout {
         this.product = product;
         this.buiyer = buiyer;
         this.paymentMethod = PaymentMethod.valueOf(paymentMethod);
+        emailSender(this.product);
     }
 
     public Long getId() {
@@ -44,5 +47,17 @@ public class Checkout {
 
     public PaymentMethod getPaymentMethod() {
         return paymentMethod;
+    }
+
+    @Override
+    public void emailSender(Product product) {
+        User owner = product.getOwner();
+        String emailSender = "question-messenger@mercadolivre.com.br";
+        System.out.println("[Sender: " + emailSender + "]");
+        System.out.println("[Receiver: " + owner.getUsername() + "]");
+        System.out.println("[Subject: Sell notification for product: " + product.getName() + "]");
+        System.out.println("[Body: " + buiyer.getUsername() +
+                " : bought " + quantity + " of your product: " +
+                product.getName() + "\n Total: R$ " + totalValue + "]");
     }
 }
