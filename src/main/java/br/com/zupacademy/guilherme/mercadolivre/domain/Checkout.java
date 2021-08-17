@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
+import java.net.URI;
 
 @Entity
 @Table(name = "tbl_checkouts")
@@ -16,28 +17,42 @@ public class Checkout implements EmailSenderObserver {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull @Positive
+    @NotNull
+    @Positive
     private Integer quantity;
-    @NotNull @PositiveOrZero
+    @NotNull
+    @PositiveOrZero
     private BigDecimal unitaryValue;
-    @NotNull @PositiveOrZero
+    @NotNull
+    @PositiveOrZero
     private BigDecimal totalValue;
-    @NotNull @ManyToOne
+    @NotNull
+    @ManyToOne
     private Product product;
-    @NotNull @ManyToOne
+    @NotNull
+    @ManyToOne
     private User buiyer;
 
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
 
-    public Checkout(Product product, User buiyer, BigDecimal value, @NotBlank String paymentMethod, @NotNull @Positive Integer quantity) {
-        this.unitaryValue = value;
-        this.quantity = quantity;
-        this.unitaryValue = value;
-        this.totalValue = value.multiply(BigDecimal.valueOf(quantity));
+    @Enumerated(EnumType.STRING)
+    private CheckoutStatus checkoutStatus = CheckoutStatus.INITIALIZED;
+
+    @Deprecated
+    public Checkout() {}
+
+    public Checkout(Product product,
+                    User buiyer,
+                    BigDecimal value,
+                    @NotBlank String paymentMethod,
+                    @NotNull @Positive Integer quantity) {
         this.product = product;
         this.buiyer = buiyer;
+        this.unitaryValue = value;
         this.paymentMethod = PaymentMethod.valueOf(paymentMethod);
+        this.quantity = quantity;
+        this.totalValue = value.multiply(BigDecimal.valueOf(quantity));
         emailSender(this.product);
     }
 
@@ -47,6 +62,10 @@ public class Checkout implements EmailSenderObserver {
 
     public PaymentMethod getPaymentMethod() {
         return paymentMethod;
+    }
+
+    public void finishCheckout() {
+        this.checkoutStatus = CheckoutStatus.FINISHED;
     }
 
     @Override
@@ -60,4 +79,6 @@ public class Checkout implements EmailSenderObserver {
                 " : bought " + quantity + " of your product: " +
                 product.getName() + "\n Total: R$ " + totalValue + "]");
     }
+
+
 }

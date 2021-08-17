@@ -19,7 +19,7 @@ public class TokenManager {
     private String secret;
 
     private Date generateExpirationDate() {
-        Date date = Date.from(LocalDateTime.now().plusHours(1).atZone(ZoneId.of("America/Sao_Paulo")).toInstant());
+        Date date = Date.from(LocalDateTime.now().plusHours(24).atZone(ZoneId.of("America/Sao_Paulo")).toInstant());
         return date;
     }
 
