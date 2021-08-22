@@ -1,7 +1,7 @@
 package br.com.zupacademy.guilherme.mercadolivre.security;
 
-import br.com.zupacademy.guilherme.mercadolivre.domain.User;
-import br.com.zupacademy.guilherme.mercadolivre.repository.UserRepository;
+import br.com.zupacademy.guilherme.mercadolivre.user.domain.User;
+import br.com.zupacademy.guilherme.mercadolivre.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

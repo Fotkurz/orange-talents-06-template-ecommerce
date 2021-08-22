@@ -1,6 +1,6 @@
 package br.com.zupacademy.guilherme.mercadolivre.validation;
 
-import br.com.zupacademy.guilherme.mercadolivre.domain.PaymentMethod;
+import br.com.zupacademy.guilherme.mercadolivre.checkout.controller.PaymentMethod;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

@@ -1,7 +1,7 @@
 package br.com.zupacademy.guilherme.mercadolivre.security;
 
-import br.com.zupacademy.guilherme.mercadolivre.controller.filter.TokenAuthenticationFilter;
-import br.com.zupacademy.guilherme.mercadolivre.repository.UserRepository;
+import br.com.zupacademy.guilherme.mercadolivre.security.filter.TokenAuthenticationFilter;
+import br.com.zupacademy.guilherme.mercadolivre.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -50,7 +50,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
-                .antMatchers(HttpMethod.GET, "/payment-processor/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/invoicegenerator/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/vendorrating/**").permitAll()
                 .antMatchers("/h2-console").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .anyRequest().authenticated()

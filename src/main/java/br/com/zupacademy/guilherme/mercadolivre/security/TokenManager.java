@@ -1,6 +1,6 @@
 package br.com.zupacademy.guilherme.mercadolivre.security;
 
-import br.com.zupacademy.guilherme.mercadolivre.domain.User;
+import br.com.zupacademy.guilherme.mercadolivre.user.domain.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
